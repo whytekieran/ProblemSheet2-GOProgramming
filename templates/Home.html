@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Go Web Application</title>
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+
+</head>
+<body>
+<h1>Hello, world! This is a static HTML page</h1>
+<label style="color:blue;" id="textReverse"></label><br>
+<input type="text" style="width:400px;" placeholder="HTTP GET Reverse word - Output label will be blue" onkeyup="reverse()" id="textNormal"><br>
+
+<label style="color:red;" id="textReversePost"></label><br>
+<input type="text" style="width:400px;" placeholder="HTTP POST Reverse word - Output label will be red" onkeyup="reversePost()" id="textNormalPost"><br>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+
+    function reverse()
+    {
+        var textNormal = document.getElementById("textNormal").value;
+        //var textReverse = reverseAndOutput(textNormal);Dont call this anymore(old way)
+        //document.getElementById("textReverse").innerHTML = textReverse;
+
+        //Use some JQuery
+        $.ajax({
+            url: "http://localhost:8080/Reverse/"+textNormal, // Url to which the request is send
+            type: "GET",             // Type of request to be send, called as method
+            dataType: "html",		  //Data expected back
+            success: function(data)   // A function to be called if request succeeds
+            {
+                document.getElementById("textReverse").innerHTML = data;
+            },
+            error: function(xhr, textStatus, errorThrown)
+            {
+               alert(textStatus);
+                alert(errorThrown.toString());
+            }
+        });//End AJAX call
+
+
+    }
+
+    function reversePost()
+    {
+        var textNormal = document.getElementById("textNormalPost").value;
+
+        $.ajax({
+            url: "http://localhost:8080/Reverse", // Url to which the request is send
+            type: "POST",             // Type of request to be send, called as method
+            data: textNormal,
+            dataType: "html",		  //Data expected back
+            success: function(data)   // A function to be called if request succeeds
+            {
+                document.getElementById("textReversePost").innerHTML = data;
+            },
+            error: function(xhr, textStatus, errorThrown)
+            {
+                alert(textStatus);
+                alert(errorThrown.toString());
+            }
+        });//End AJAX call
+    }
+
+    //not needed anymore, used when doing reverse client side
+   /* function reverseAndOutput(textNormal)
+    {
+        return textNormal.split('').reverse().join(''); //taken from stack overflow
+    }*/
+
+</script>
+</body>
+</html>
