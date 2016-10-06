@@ -1,6 +1,6 @@
 # ProblemSheet2_GOProgramming
 
-Solution to Emerging Technologies Problem Sheet. Written using GO and the Gorilla Web Toolkit. 
+Solution to the Problem Sheet outline below. Written using GO and the Gorilla Web Toolkit. 
 
 1. Create a git repository for the following problems. Make sure your repository has a readme ﬁle, a license ﬁle and a gitignore ﬁle. 
 
